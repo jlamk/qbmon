@@ -3,7 +3,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
-VERSION = 1.0.0
+VERSION = 1.0.1
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -11,15 +11,18 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    about.cpp \
     dialogmonitors.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    about.h \
     dialogmonitors.h \
     mainwindow.h
 
 FORMS += \
+    about.ui \
     dialogmonitors.ui \
     mainwindow.ui
 

@@ -17,8 +17,12 @@ void MainWindow::LoadConfig()
 
     if ( QFile::exists(config_file) )
     {
-        Current_Monitor = settings.value("monitor","VGA1").toString();
+        Current_Monitor = settings.value("monitor","").toString();
         Current_brightness = settings.value("brightness",1).toFloat();
+        if ( Current_Monitor == "" )
+            ui->horizontalSlider->setEnabled(false);
+        else
+            ui->horizontalSlider->setEnabled(true);
     }
     else
     {
@@ -27,6 +31,7 @@ void MainWindow::LoadConfig()
         Current_Monitor = "";
         Current_brightness = 1;
         settings.sync();
+        ui->horizontalSlider->setEnabled(false);
     }
         ui->horizontalSlider->setValue(Current_brightness * 10);
 }
@@ -38,6 +43,8 @@ void MainWindow::SaveConfig()
     settings.setValue("monitor",this->Current_Monitor);
     settings.setValue("brightness",Current_brightness);
     settings.sync();
+    if (  Current_Monitor != "" )
+        ui->horizontalSlider->setEnabled(true);
 }
 
 MainWindow::MainWindow(QWidget *parent)
