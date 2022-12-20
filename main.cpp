@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     if ( !QFile::exists("/bin/xrandr") )
     {
         QMessageBox msgError;
-        msgError.setText("xrandr not found");
+        msgError.setText("xrandr not found!");
         msgError.setIcon(QMessageBox::Warning);
         msgError.setWindowTitle("Error");
         msgError.exec();

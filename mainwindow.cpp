@@ -111,7 +111,6 @@ void MainWindow::on_horizontalSlider_valueChanged(int value)
 void MainWindow::on_pushButton_clicked()
 {
     DialogMonitors *list = new DialogMonitors();
-    connect( list,SIGNAL(SelectedMonitor(QString)), this, SLOT(SelectedMonitor(QString)));
     list->AddMonitorsList( QStringList() << this->Current_Monitor << GetMonitorsList());
     list->exec();
     this->Current_Monitor = list->GetSelectedMonitor();

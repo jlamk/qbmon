@@ -15,14 +15,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void AddMonitorsList( QStringList List );
+    void SelectedMonitor(QString monitor){ this->Current_Monitor = monitor; SaveConfig(); }
 
 private slots:
     void on_horizontalSlider_valueChanged(int value);
     void on_pushButton_clicked();
-    void SelectedMonitor(QString monitor){ this->Current_Monitor = monitor; SaveConfig(); }
-
-signals:
-    void AddMonitorsList( QStringList List );
 
 private:
     Ui::MainWindow *ui;
