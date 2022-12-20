@@ -24,13 +24,19 @@
    <item row="1" column="0" colspan="2">
     <widget class="QComboBox" name="comboBox"/>
    </item>
-   <item row="2" column="0" colspan="2">
+   <item row="2" column="0" colspan="2" alignment="Qt::AlignRight">
     <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Help|QDialogButtonBox::Ok</set>
+     </property>
+     <property name="centerButtons">
+      <bool>false</bool>
      </property>
     </widget>
    </item>

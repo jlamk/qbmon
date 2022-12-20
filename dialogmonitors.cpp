@@ -34,3 +34,9 @@ void DialogMonitors::on_buttonBox_helpRequested()
     about.exec();
 }
 
+
+void DialogMonitors::on_buttonBox_rejected()
+{
+
+}
+

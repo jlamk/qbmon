@@ -22,6 +22,8 @@ private slots:
 
     void on_buttonBox_helpRequested();
 
+    void on_buttonBox_rejected();
+
 private:
     Ui::DialogMonitors *ui;
     QString SelectedMonitor;

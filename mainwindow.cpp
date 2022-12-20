@@ -120,7 +120,11 @@ void MainWindow::on_pushButton_clicked()
     DialogMonitors *list = new DialogMonitors();
     list->AddMonitorsList( QStringList() << this->Current_Monitor << GetMonitorsList());
     list->exec();
-    this->Current_Monitor = list->GetSelectedMonitor();
+    QString select = list->GetSelectedMonitor();
+    if ( select != "")
+    {
+        this->Current_Monitor = list->GetSelectedMonitor();
+    }
     list->deleteLater();
     SaveConfig();
 }
