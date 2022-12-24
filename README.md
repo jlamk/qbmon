@@ -8,7 +8,6 @@ $ git clone https://github.com/rlamk/qbmon.git
 $ cd qbmon  
 $ qmake 
 $ make  
-
 $ sudo make install  
 $ ./qbmon  
 
