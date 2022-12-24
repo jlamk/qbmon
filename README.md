@@ -13,3 +13,5 @@ $ ./qbmon
 
 # dependencies
 xrandr
+
+@
