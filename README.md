@@ -6,7 +6,8 @@ qbmon is a lightweight and easy-to-use tool that is perfect for users who want t
 # building 
 $ git clone https://github.com/rlamk/qbmon.git  
 $ cd qbmon  
-$ qmake  
+$ qmake 
+$ make
 $ sudo make install  
 $ ./qbmon  
 
