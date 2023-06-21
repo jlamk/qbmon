@@ -1,5 +1,5 @@
 /*
- * https://github.com/rlamk/qbmon
+ * https://github.com/jlamk/qbmon
  */
 
 #include "mainwindow.h"
