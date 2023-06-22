@@ -4,7 +4,7 @@
 qbmon is a simple graphical interface for xrandr.
 
 # building 
-$ git clone https://github.com/rlamk/qbmon.git  
+$ git clone https://github.com/jlamk/qbmon.git  
 $ cd qbmon  
 $ qmake<br>
 $ make<br>
