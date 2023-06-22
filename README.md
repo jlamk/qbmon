@@ -9,7 +9,6 @@ $ cd qbmon
 $ qmake<br>
 $ make<br>
 $ sudo make install  
-$ ./qbmon  
 
 # dependencies
 xrandr
