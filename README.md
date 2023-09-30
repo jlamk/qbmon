@@ -3,6 +3,9 @@
 # qbmon
 qbmon is a simple graphical interface for xrandr.
 
+# features
+monitor brightness control
+
 # building 
 $ git clone https://github.com/jlamk/qbmon.git  
 $ cd qbmon  
