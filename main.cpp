@@ -1,7 +1,3 @@
-/*
- * https://github.com/jlamk/qbmon
- */
-
 #include "mainwindow.h"
 
 #include <QApplication>

@@ -10,6 +10,9 @@
 #include <QInputDialog>
 #include <QRegularExpressionMatch>
 
+#include <X11/Xlib.h>
+#include <X11/extensions/Xrandr.h>
+
 void MainWindow::LoadConfig()
 {
     const QString config_file = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/config";
@@ -67,35 +70,42 @@ float conv( int pos )
     return pos / 10.0;
 }
 
-/*Create a QStringList from the extraction of a QRegularExpression
-https://forum.qt.io/post/382003
-*/
-static QStringList extractStr(const QString &s, QRegularExpression delim){
-    QStringList output;
-    QString buff;
-    QRegularExpressionMatchIterator i = delim.globalMatch(s);
-    while (i.hasNext()) {
-        QRegularExpressionMatch match = i.next();
-        if (match.hasMatch()) {
-            buff = match.captured(0);
-            output.push_back(buff);
-        }
+QStringList GetDispList() {
+    QStringList list;
+
+    Display* display = XOpenDisplay(nullptr);
+
+    if (!display) {
+        qInfo() << "Failed to open X display.";
+        exit(0);
     }
-    return output;
-}
+    Window root = DefaultRootWindow(display);
 
-QStringList GetMonitorsList()
-{
-    QProcess process;
-    QStringList args;
-    process.setProgram("/bin/xrandr");
-    process.setArguments(args);
-    process.start();
-    process.waitForReadyRead();
-    QString output = process.readAll();
+    // Get screen resources
+    XRRScreenResources* screenResources = XRRGetScreenResources(display, root);
+    if (!screenResources) {
+        qInfo() << "Failed to get screen resources.";
+        return list;
+    }
 
-    QRegularExpression exp("([A-Z]{1}[A-Za-z]*)([0-9]*)");
-    QStringList list = extractStr(output,exp);
+    // Iterate over outputs
+    for (int i = 0; i < screenResources->noutput; ++i) {
+        XRROutputInfo* outputInfo = XRRGetOutputInfo(display, screenResources, screenResources->outputs[i]);
+        if (!outputInfo) continue;
+
+        // Check if the output is connected
+        if (outputInfo->connection == RR_Connected) {
+            list.append(outputInfo->name);
+        }
+
+        // Free the output information
+        XRRFreeOutputInfo(outputInfo);
+    }
+
+    // Free the screen resources
+    XRRFreeScreenResources(screenResources);
+
+    XCloseDisplay(display);
     return list;
 }
 
@@ -110,6 +120,7 @@ void MainWindow::on_horizontalSlider_valueChanged(int value)
     process.setProgram("/bin/xrandr");
     process.setArguments(args);
     process.startDetached();
+
     SaveConfig();
     setWindowTitle( "qbmon ver. "+QString(APP_VERSION)+" ( "+QString::number(Current_brightness)+" )" );
 }
@@ -117,8 +128,10 @@ void MainWindow::on_horizontalSlider_valueChanged(int value)
 
 void MainWindow::on_pushButton_clicked()
 {
+    QStringList monitors =  GetDispList();
+
     DialogMonitors *list = new DialogMonitors();
-    list->AddMonitorsList( QStringList() << this->Current_Monitor << GetMonitorsList());
+    list->AddMonitorsList( monitors );
     list->exec();
     QString select = list->GetSelectedMonitor();
     if ( select != "")
