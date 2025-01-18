@@ -17,6 +17,6 @@ $ make<br>
 $ sudo make install  
 
 # dependencies
-xrandr
-xrandr-dev
+xrandr<br>
+xrandr-dev<br>
 @
