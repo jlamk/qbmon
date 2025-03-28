@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include <QString>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,6 +18,7 @@ public:
     ~MainWindow();
     void AddMonitorsList( QStringList List );
     void SelectedMonitor(QString monitor){ this->Current_Monitor = monitor; SaveConfig(); }
+    QString xrandr;
 
 private slots:
     void on_horizontalSlider_valueChanged(int value);

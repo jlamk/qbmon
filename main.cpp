@@ -20,7 +20,15 @@ int main(int argc, char *argv[])
         }
     }
 
-    if ( !QFile::exists("/bin/xrandr") )
+    QString xrandr_path;
+
+    if ( QFile::exists("/usr/bin/xrandr")  )
+        xrandr_path = "/usr/bin/xrandr";
+    else
+        if ( QFile::exists("/bin/xrandr")  )
+            xrandr_path = "/bin/xrandr";
+
+    if ( xrandr_path == "" )
     {
         QMessageBox msgError;
         msgError.setText("xrandr not found!");
@@ -31,6 +39,8 @@ int main(int argc, char *argv[])
     }
 
     MainWindow w;
+    w.xrandr = xrandr_path;
+    qInfo() << xrandr_path;
     w.show();
     return a.exec();
 }

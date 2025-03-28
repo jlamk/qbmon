@@ -117,12 +117,12 @@ void MainWindow::on_horizontalSlider_valueChanged(int value)
     QStringList args;
     Current_brightness = conv(value);
     args << "--output" << Current_Monitor << "--brightness" << QString::number(Current_brightness);
-    process.setProgram("/bin/xrandr");
+    process.setProgram(xrandr);
     process.setArguments(args);
     process.startDetached();
 
     SaveConfig();
-    setWindowTitle( "qbmon ver. "+QString(APP_VERSION)+" ( "+QString::number(Current_brightness)+" )" );
+    setWindowTitle( "qbmon ( "+QString::number(Current_brightness)+" )" );
 }
 
 
